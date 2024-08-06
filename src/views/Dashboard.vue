@@ -69,7 +69,8 @@ export default {
             shopifyReadyToDL: false,
             generatedGID: null,
             processText: "Choose Process",
-            apiURL: 'http://localhost:3000',
+            //apiURL: 'http://localhost:3000',
+            apiURL: 'https://inventory-validator.onrender.com',
             //apiURL: 'https://omisell-validator.onrender.com',
             selectSite: '',
             sites: [
