@@ -69,9 +69,8 @@ export default {
             shopifyReadyToDL: false,
             generatedGID: null,
             processText: "Choose Process",
-            //apiURL: 'http://localhost:3000',
-            apiURL: 'https://inventory-validator.onrender.com',
-            //apiURL: 'https://omisell-validator.onrender.com',
+            apiURL: 'http://localhost:3000',
+            //apiURL: 'https://inventory-validator.onrender.com',
             selectSite: '',
             sites: [
                 {
@@ -206,7 +205,7 @@ export default {
                 formData.append('file', this.file)
 
                 try {
-                    this.processText = "Reading " + this.choosedPlatform + " Inventory" + this.selectSite + ". . ."
+                    this.processText = "Reading " + this.choosedPlatform + " inventory of " + this.selectSite + ". . ."
 
                     console.log("test2")
                     const params = {
@@ -230,7 +229,7 @@ export default {
 
                         this.processText = "Report Generated <br />"
                         this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
-                        this.processText += "Per Group : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                        this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
                     })
                 } catch (error) {
                     console.error(error)
@@ -330,7 +329,7 @@ export default {
 
                                                     this.processText = "Report Generated <br />"
                                                     this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
-                                                    this.processText += "Per Group : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                                                    this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
                                                 })
                                         })
                                 }
