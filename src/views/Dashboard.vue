@@ -81,7 +81,25 @@ export default {
                 },
                 {
                     'name': "GRIND"
-                }
+                },
+                {
+                    'name': "ROX"
+                },
+                {
+                    'name': "BRATPACK"
+                },
+                {
+                    'name': "JANSPORT"
+                },
+                {
+                    'name': "HYDROFLASK"
+                },
+                {
+                    'name': "EYS"
+                },
+                {
+                    'name': "AETREX"
+                },
             ]
         }
     },
