@@ -77,10 +77,7 @@ export default {
                     'name': "RESTOERUN"
                 },
                 {
-                    'name': "DC"
-                },
-                {
-                    'name': "BRATPACK"
+                    'name': "TTC"
                 }
             ]
         }
