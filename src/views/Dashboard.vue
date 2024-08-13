@@ -1,14 +1,25 @@
 <template>
     <div class="main-container">
-        <select v-model="selectSite" class="select-site">
-            <option selected value="">-- Select Site-- </option>
+        <div class="process-text" v-html="processText"></div>
+        <div class="error-msg" v-html="errorMsg"></div>
+        <label>Choose Site: </label><br />
+        <select v-model="selectSite" class="select-field select-site">
+            <option selected value="">-- select -- </option>
             <option v-for="item in sites" :value="item.name">
                 {{ item.name }}
             </option>
         </select>
         <br />
         <div class="export-btn-container">
-            <button :class="choosedPlatform === 'shopify' ? 'choosed' : ''" color="primary"
+            <label>Choose Platform: </label><br />
+            <select v-model="choosedPlatform" class="select-field">
+                <option value="">-- select --</option>
+                <option value="shopify">Shopify</option>
+                <option value="lazada">Lazada</option>
+                <option value="shopee">Shopee</option>
+                <option value="zalora">Zalora</option>
+            </select>
+            <!--<button :class="choosedPlatform === 'shopify' ? 'choosed' : ''" color="primary"
                 class="export-btn export-shopify" @click="exportShopify"> SHOPIFY</button>
             <button :class="choosedPlatform === 'shopee' ? 'choosed' : ''" color="primary"
                 class="export-btn export-shopee" @click="exportShopee"> SHOPEE</button>
@@ -16,23 +27,23 @@
                 class="export-btn export-lazada" @click="exportLazada"> LAZADA</button>
             <button :class="choosedPlatform === 'zalora' ? 'choosed' : ''" color="primary"
                 class="export-btn export zalora" @click="exportZalora"> ZALORA</button>
+            -->
         </div>
-        <br />
         <div class="upload">
-            <label>Omisell Inventory: </label>
+            <label>Omisell Inventory: </label><br />
             <input type="file" class="upload-omisell" @change="handleOmisellUpload" />
             <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
         </div>
-        <br />
         <div class="upload-platform" v-if="showUploadPlatform">
             <label>Upload Platform Inventory: </label>
             <input type="file" class="upload-omisell" @change="handleMPUpload" />
             <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
         </div>
         <br />
+        <br />
         <button v-show="choosedPlatform != null" class="submit-generate-report" @click="generateReport">GENERATE
             REPORT</button>
-        <!-- 
+        <!--  
         <br />
         <div class="upload">
             <label>Shopee Inventory: </label>
@@ -51,26 +62,29 @@
         -->
         <br />
 
-        <div class="process-text" v-html="processText"></div>
-
+        
+        <div class="loader" v-if="isLoading"></div>
 
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { errorMessages } from 'vue/compiler-sfc';
 
 export default {
     data() {
         return {
-            choosedPlatform: null,
+            errorMsg: '',
+            isLoading: false,
+            choosedPlatform: '',
             showUploadPlatform: false,
             file: null,
             shopifyReadyToDL: false,
             generatedGID: null,
-            processText: "Choose Process",
-            //apiURL: 'http://localhost:3000',
-            apiURL: 'https://inventory-validator.onrender.com',
+            processText: "",
+            apiURL: 'http://localhost:3000',
+            //apiURL: 'https://inventory-validator.onrender.com',
             selectSite: '',
             sites: [
                 {
@@ -107,15 +121,10 @@ export default {
     methods: {
 
         async handleOmisellUpload(event) {
-            console.log('omisell upload')
-
+            this.isLoading = true
             const formData = new FormData()
-
             const files = Array.from(event.target.files);
-
             this.file = files[0]
-
-            console.log(this.file)
 
             formData.append('file', this.file)
 
@@ -127,6 +136,7 @@ export default {
                     },
                 }).then(response => {
                     console.log(response)
+                    this.isLoading = false
                 })
             } catch (error) {
                 console.error(error)
@@ -134,6 +144,7 @@ export default {
         },
 
         async handleMPUpload(event) {
+            this.isLoading = true
             console.log('omisell upload')
 
             const formData = new FormData()
@@ -154,6 +165,7 @@ export default {
                     },
                 }).then(response => {
                     console.log(response)
+                    this.isLoading = false
                 })
             } catch (error) {
                 console.error(error)
@@ -184,6 +196,7 @@ export default {
             }
         },*/
 
+        /*
         exportShopify() {
             this.choosedPlatform = 'shopify'
             this.showUploadPlatform = false
@@ -206,9 +219,10 @@ export default {
             this.choosedPlatform = 'zalora'
             this.showUploadPlatform = true
             console.log("test123: " + this.choosedPlatform)
-        },
+        },*/
 
         async generateReport() {
+            this.isLoading = true
             const apiURL = this.apiURL
             const selectSite = this.selectSite
 
@@ -244,10 +258,17 @@ export default {
                     })
                     .then(response => {
                         console.log(response)
+                        console.log('response.error_msg: ' + response.error_msg)
 
-                        this.processText = "Report Generated <br />"
-                        this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
-                        this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                        if(response.error_msg){
+                            this.errorMsg = response.error_msg
+                        }else{
+                            this.processText = "Report Generated <br />"
+                            this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
+                            this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                        }
+
+                        this.isLoading = true
                     })
                 } catch (error) {
                     console.error(error)
@@ -255,7 +276,7 @@ export default {
             }
 
             if (this.choosedPlatform == 'shopify') {
-
+                this.isLoading = true
 
                 if (!this.file) {
                     alert('Please select a file')
@@ -267,7 +288,7 @@ export default {
                 formData.append('file', this.file)
 
                 try {
-                    this.processText = "Pulling inventory from Shopify, Please wait. . ."
+                    this.processText = "Pulling inventory from Shopify, Please wait . . ."
 
                     console.log("test2")
                     const params = {
@@ -307,7 +328,7 @@ export default {
 
                                 console.log("responseBulk: " + responseBulk.data)
 
-                                this.processText = this.processText + ' .'
+                                //this.processText = this.processText + ' .'
 
                                 if (responseBulk.data != null) {
                                     clearInterval(generateBulkInterval)
@@ -344,10 +365,17 @@ export default {
                                             })
                                                 .then(response => {
                                                     console.log(response)
+                                                    console.log('response.error_msg: ' + response.data.error_msg)
 
-                                                    this.processText = "Report Generated <br />"
-                                                    this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
-                                                    this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                                                    if(response.data.error_msg){
+                                                        this.errorMsg = response.data.error_msg
+                                                        this.processText = null
+                                                    }else{
+                                                        this.processText = "Report Generated <br />"
+                                                        this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
+                                                        this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                                                    }
+                                                    this.isLoading = false
                                                 })
                                         })
                                 }
@@ -380,6 +408,41 @@ body a {
     color: #000;
 }
 
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 60px;
+  aspect-ratio: 1;
+  display: grid;
+  grid: 50%/50%;
+  animation: l4-0 2s infinite steps(1);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 30%;
+  margin: 0 auto;
+}
+.loader::before {
+  content: "";
+  transform-origin: bottom; 
+  animation: 
+    l4-1 0.5s infinite linear alternate,
+    l4-2 0.5s infinite steps(1) alternate;
+}
+@keyframes l4-0 {
+  0%  {transform:scale(1 , 1) rotate(0deg)}
+  25% {transform:scale(1 ,-1) rotate(90deg)}
+  50% {transform:scale(-1,-1) rotate(0deg)}
+  75% {transform:scale(-1, 1) rotate(90deg)}
+}
+@keyframes l4-1 {
+  0%   {transform:perspective(150px) rotateX(  0deg)}
+  100% {transform:perspective(150px) rotateX(180deg)}
+}
+@keyframes l4-2 {
+  0% {background:#ffa516}
+  50%{background:#f03355}
+}
+
 .submit-generate-report {
     background-color: red;
     padding: 10px;
@@ -390,6 +453,13 @@ body a {
 label {
     color: #000;
     font-weight: bold;
+}
+
+.error-msg {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: crimson;
 }
 
 .upload-omisell {
@@ -410,18 +480,21 @@ label {
 
 .process-text {
     font-weight: bold;
-    margin-bottom: 20px;
-    margin-top: 50px;
+    margin-bottom: 40px;
+    /* margin-top: 50px; */
     color: #000;
+    text-align: center;
 }
-
-.select-site {
+.select-field{
     width: 200px;
     border: 1px solid #ccc;
     padding: 5px;
-    margin-left: 11px;
     border-radius: 6px;
     margin-bottom: 21px;
+}
+
+.select-site {
+    
 }
 
 button.export-btn.export-shopify {
