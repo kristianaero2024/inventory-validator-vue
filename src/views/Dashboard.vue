@@ -82,7 +82,7 @@ export default {
             file: null,
             shopifyReadyToDL: false,
             generatedGID: null,
-            processText: "",
+            processText: "", 
             //apiURL: 'http://localhost:3000',
             apiURL: 'https://inventory-validator.onrender.com',
             selectSite: '',
