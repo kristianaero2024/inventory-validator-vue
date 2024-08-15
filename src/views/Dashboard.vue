@@ -34,8 +34,9 @@
             <input type="file" class="upload-omisell" @change="handleOmisellUpload" />
             <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
         </div>
-        <div class="upload-platform" v-if="showUploadPlatform">
-            <label>Upload Platform Inventory: </label>
+        <br />
+        <div class="upload-platform" v-show="choosedPlatform == 'lazada' || choosedPlatform == 'shopee' || choosedPlatform == 'zalora'">
+            <label>Marketplace Inventory: </label><br />
             <input type="file" class="upload-omisell" @change="handleMPUpload" />
             <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
         </div>
@@ -114,6 +115,9 @@ export default {
                 {
                     'name': "AETREX"
                 },
+                {
+                    'name': "DC"
+                },
             ]
         }
     },
@@ -130,7 +134,7 @@ export default {
 
             try {
                 console.log("test2")
-                const response = await axios.post(this.apiURL + '/upload-omisell-csv?platform=' + this.choosedPlatform + '&site=' + this.selectSite, formData, {
+                const response = await axios.post(this.apiURL + '/upload-csv?type=omisell&platform=' + this.choosedPlatform + '&site=' + this.selectSite, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -145,21 +149,16 @@ export default {
 
         async handleMPUpload(event) {
             this.isLoading = true
-            console.log('omisell upload')
-
             const formData = new FormData()
-
             const files = Array.from(event.target.files);
-
             this.file = files[0]
-
-            console.log(this.file)
 
             formData.append('file', this.file)
 
             try {
                 console.log("test2")
-                const response = await axios.post(this.apiURL + '/upload-mp-csv?type=' + this.choosedPlatform + '&site=' + this.selectSite, formData, {
+
+                const response = await axios.post(this.apiURL + '/upload-csv?type=mp&platform=' + this.choosedPlatform + '&site=' + this.selectSite, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -245,13 +244,15 @@ export default {
                         site: this.selectSite
                     }
 
-                    const paramsGenerateReport = {
+                    const data = {
                         //platformCSV: response.data.fileName,
-                        type: this.choosedPlatform,
-                        site: this.selectSite
+                        platform: this.choosedPlatform,
+                        site: this.selectSite,
+                        type: 'mp',
+                        platformCSV : 'mp-' + this.choosedPlatform + '-' + this.selectSite + '.csv'
                     }
 
-                    const responseGenerateReport = await axios.post(apiURL + '/compare-inventory-mp', paramsGenerateReport, {
+                    const responseGenerateReport = await axios.post(apiURL + '/compare-inventory', data, {
                         headers: {
                             'Content-Type': 'application/json'
                         }
@@ -268,7 +269,7 @@ export default {
                             this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
                         }
 
-                        this.isLoading = true
+                        this.isLoading = false
                     })
                 } catch (error) {
                     console.error(error)
@@ -276,6 +277,10 @@ export default {
             }
 
             if (this.choosedPlatform == 'shopify') {
+
+                console.log('shopify')
+
+
                 this.isLoading = true
 
                 if (!this.file) {
@@ -353,8 +358,9 @@ export default {
 
                                             const paramsGenerateReport = {
                                                 platformCSV: response.data.fileName,
-                                                type: this.choosedPlatform,
-                                                site: this.selectSite
+                                                platform: this.choosedPlatform,
+                                                site: this.selectSite,
+                                                type: 'shopify'
                                             }
 
                                             const responseGenerateReport = await axios.post(apiURL + '/compare-inventory', paramsGenerateReport, {
