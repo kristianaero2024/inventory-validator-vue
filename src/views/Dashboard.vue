@@ -14,7 +14,7 @@
             <label>Choose Platform: </label><br />
             <select v-model="choosedPlatform" class="select-field">
                 <option value="">-- select --</option>
-                <option value="shopify">Shopify</option>
+                <option v-if="selectSite != 'ACTION_SPORTS_AND_OUTDOOR' && selectSite != 'BAGS_AND_TRAVEL' && selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'" value="shopify">Shopify</option>
                 <option value="lazada">Lazada</option>
                 <option value="shopee">Shopee</option>
                 <option value="zalora">Zalora</option>
@@ -118,6 +118,16 @@ export default {
                 {
                     'name': "DC"
                 },
+                {
+                    'name': "ACTION_SPORTS_AND_OUTDOOR"
+                },
+                {
+                    'name': "BAGS_AND_TRAVEL"
+                },
+                {
+                    'name': "FOOTWEAR_WELLNESS_AND_ACCESSORIES"
+                },
+                
             ]
         }
     },
