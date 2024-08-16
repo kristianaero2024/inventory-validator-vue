@@ -64,7 +64,7 @@
         <br />
 
         
-        <div class="loader" v-if="isLoading"></div>
+        <div class="loader" v-if="isLoading"></div> 
 
     </div>
 </template>
