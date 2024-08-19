@@ -2,22 +2,24 @@
     <div class="main-container">
         <div class="process-text" v-html="processText"></div>
         <div class="error-msg" v-html="errorMsg"></div>
-        <label>Choose Site: </label><br />
-        <select v-model="selectSite" class="select-field select-site">
-            <option selected value="">-- select -- </option>
-            <option v-for="item in sites" :value="item.name">
-                {{ item.name }}
-            </option>
-        </select>
-        <br />
         <div class="export-btn-container">
             <label>Choose Platform: </label><br />
             <select v-model="choosedPlatform" class="select-field">
                 <option value="">-- select --</option>
-                <option v-if="selectSite != 'ACTION_SPORTS_AND_OUTDOOR' && selectSite != 'BAGS_AND_TRAVEL' && selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'" value="shopify">Shopify</option>
+                <option
+                    v-if="selectSite != 'ACTION_SPORTS_AND_OUTDOOR' && selectSite != 'BAGS_AND_TRAVEL' && selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'"
+                    value="shopify">Shopify</option>
                 <option value="lazada">Lazada</option>
                 <option value="shopee">Shopee</option>
                 <option value="zalora">Zalora</option>
+            </select>
+            <br />
+            <label>Choose Site: </label><br />
+            <select v-model="selectSite" class="select-field select-site">
+                <option selected value="">-- select -- </option>
+                <option v-for="(details, siteName) in filteredSites" :key="siteName" :value="siteName">
+                    {{ siteName }}
+                </option>
             </select>
             <!--<button :class="choosedPlatform === 'shopify' ? 'choosed' : ''" color="primary"
                 class="export-btn export-shopify" @click="exportShopify"> SHOPIFY</button>
@@ -35,7 +37,8 @@
             <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
         </div>
         <br />
-        <div class="upload-platform" v-show="choosedPlatform == 'lazada' || choosedPlatform == 'shopee' || choosedPlatform == 'zalora'">
+        <div class="upload-platform"
+            v-show="choosedPlatform == 'lazada' || choosedPlatform == 'shopee' || choosedPlatform == 'zalora'">
             <label>Marketplace Inventory: </label><br />
             <input type="file" class="upload-omisell" @change="handleMPUpload" />
             <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
@@ -63,8 +66,8 @@
         -->
         <br />
 
-        
-        <div class="loader" v-if="isLoading"></div> 
+
+        <div class="loader" v-if="isLoading"></div>
 
     </div>
 </template>
@@ -83,52 +86,141 @@ export default {
             file: null,
             shopifyReadyToDL: false,
             generatedGID: null,
-            processText: "", 
+            processText: "",
             //apiURL: 'http://localhost:3000',
             apiURL: 'https://inventory-validator.onrender.com',
             selectSite: '',
-            sites: [
-                {
-                    'name': "RESTOERUN"
-                },
-                {
-                    'name': "TTC"
-                },
-                {
-                    'name': "GRIND"
-                },
-                {
-                    'name': "ROX"
-                },
-                {
-                    'name': "BRATPACK"
-                },
-                {
-                    'name': "JANSPORT"
-                },
-                {
-                    'name': "HYDROFLASK"
-                },
-                {
-                    'name': "EYS"
-                },
-                {
-                    'name': "AETREX"
-                },
-                {
-                    'name': "DC"
-                },
-                {
-                    'name': "ACTION_SPORTS_AND_OUTDOOR"
-                },
-                {
-                    'name': "BAGS_AND_TRAVEL"
-                },
-                {
-                    'name': "FOOTWEAR_WELLNESS_AND_ACCESSORIES"
-                },
-                
-            ]
+            sites: {
+                "AVON": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "RESTOERUN": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "TTC": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "GRIND": {
+                    'is_shopify': false,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "ROX": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "BRATPACK": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "JANSPORT": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "HYDROFLASK": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "EYS": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "AETREX": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "DC": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                }
+                ,
+                "ACTION_SPORTS_AND_OUTDOOR": {
+                    'is_shopify': false,
+                    'is_lazada': true,
+                    'is_shopee': true,
+                    'is_zalora': true
+                }
+                ,
+                "BAGS_AND_TRAVEL": {
+                    'is_shopify': false,
+                    'is_lazada': true,
+                    'is_shopee': true,
+                    'is_zalora': true
+                }
+                ,
+                "FOOTWEAR_WELLNESS_AND_ACCESSORIES": {
+                    'is_shopify': false,
+                    'is_lazada': true,
+                    'is_shopee': true,
+                    'is_zalora': true
+                }
+            },
+        }
+    },
+
+    computed: {
+        filteredSites(){
+            return Object.keys(this.sites).reduce((filtered, siteName) => {
+                if(this.choosedPlatform == 'shopify'){
+                    if(this.sites[siteName].is_shopify){
+                        filtered[siteName] = this.sites[siteName]
+                    }
+                }
+
+                if(this.choosedPlatform == 'lazada'){
+                    if(this.sites[siteName].is_lazada){
+                        filtered[siteName] = this.sites[siteName]
+                    }
+                }
+
+                if(this.choosedPlatform == 'shopee'){
+                    if(this.sites[siteName].is_shopee){
+                        filtered[siteName] = this.sites[siteName]
+                    }
+                }
+
+                if(this.choosedPlatform == 'zalora'){
+                    if(this.sites[siteName].is_zalora){
+                        filtered[siteName] = this.sites[siteName]
+                    }
+                }
+
+                return filtered
+            }, {})
         }
     },
 
@@ -259,7 +351,7 @@ export default {
                         platform: this.choosedPlatform,
                         site: this.selectSite,
                         type: 'mp',
-                        platformCSV : 'mp-' + this.choosedPlatform + '-' + this.selectSite + '.csv'
+                        platformCSV: 'mp-' + this.choosedPlatform + '-' + this.selectSite + '.csv'
                     }
 
                     const responseGenerateReport = await axios.post(apiURL + '/compare-inventory', data, {
@@ -267,20 +359,20 @@ export default {
                             'Content-Type': 'application/json'
                         }
                     })
-                    .then(response => {
-                        console.log(response)
-                        console.log('response.error_msg: ' + response.error_msg)
+                        .then(response => {
+                            console.log(response)
+                            console.log('response.error_msg: ' + response.error_msg)
 
-                        if(response.error_msg){
-                            this.errorMsg = response.error_msg
-                        }else{
-                            this.processText = "Report Generated <br />"
-                            this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
-                            this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
-                        }
+                            if (response.error_msg) {
+                                this.errorMsg = response.error_msg
+                            } else {
+                                this.processText = "Report Generated <br />"
+                                this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
+                                this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                            }
 
-                        this.isLoading = false
-                    })
+                            this.isLoading = false
+                        })
                 } catch (error) {
                     console.error(error)
                 }
@@ -383,10 +475,10 @@ export default {
                                                     console.log(response)
                                                     console.log('response.error_msg: ' + response.data.error_msg)
 
-                                                    if(response.data.error_msg){
+                                                    if (response.data.error_msg) {
                                                         this.errorMsg = response.data.error_msg
                                                         this.processText = null
-                                                    }else{
+                                                    } else {
                                                         this.processText = "Report Generated <br />"
                                                         this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
                                                         this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
@@ -426,37 +518,62 @@ body a {
 
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: 60px;
-  aspect-ratio: 1;
-  display: grid;
-  grid: 50%/50%;
-  animation: l4-0 2s infinite steps(1);
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 30%;
-  margin: 0 auto;
+    width: 60px;
+    aspect-ratio: 1;
+    display: grid;
+    grid: 50%/50%;
+    animation: l4-0 2s infinite steps(1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 30%;
+    margin: 0 auto;
 }
+
 .loader::before {
-  content: "";
-  transform-origin: bottom; 
-  animation: 
-    l4-1 0.5s infinite linear alternate,
-    l4-2 0.5s infinite steps(1) alternate;
+    content: "";
+    transform-origin: bottom;
+    animation:
+        l4-1 0.5s infinite linear alternate,
+        l4-2 0.5s infinite steps(1) alternate;
 }
+
 @keyframes l4-0 {
-  0%  {transform:scale(1 , 1) rotate(0deg)}
-  25% {transform:scale(1 ,-1) rotate(90deg)}
-  50% {transform:scale(-1,-1) rotate(0deg)}
-  75% {transform:scale(-1, 1) rotate(90deg)}
+    0% {
+        transform: scale(1, 1) rotate(0deg)
+    }
+
+    25% {
+        transform: scale(1, -1) rotate(90deg)
+    }
+
+    50% {
+        transform: scale(-1, -1) rotate(0deg)
+    }
+
+    75% {
+        transform: scale(-1, 1) rotate(90deg)
+    }
 }
+
 @keyframes l4-1 {
-  0%   {transform:perspective(150px) rotateX(  0deg)}
-  100% {transform:perspective(150px) rotateX(180deg)}
+    0% {
+        transform: perspective(150px) rotateX(0deg)
+    }
+
+    100% {
+        transform: perspective(150px) rotateX(180deg)
+    }
 }
+
 @keyframes l4-2 {
-  0% {background:#ffa516}
-  50%{background:#f03355}
+    0% {
+        background: #ffa516
+    }
+
+    50% {
+        background: #f03355
+    }
 }
 
 .submit-generate-report {
@@ -501,7 +618,8 @@ label {
     color: #000;
     text-align: center;
 }
-.select-field{
+
+.select-field {
     width: 200px;
     border: 1px solid #ccc;
     padding: 5px;
@@ -509,9 +627,7 @@ label {
     margin-bottom: 21px;
 }
 
-.select-site {
-    
-}
+.select-site {}
 
 button.export-btn.export-shopify {
     background-color: green;
@@ -558,5 +674,11 @@ button.export-btn.export.zalora {
 
 .export-btn-container {
     overflow: auto;
+}
+
+.main-container a {
+    color: dodgerblue;
+    font-weight: 600;
+    text-decoration: underline;
 }
 </style>
