@@ -113,7 +113,7 @@ export default {
                 }
                 ,
                 "GRIND": {
-                    'is_shopify': false,
+                    'is_shopify': true,
                     'is_lazada': false,
                     'is_shopee': false,
                     'is_zalora': false
