@@ -187,7 +187,13 @@ export default {
                     'is_lazada': true,
                     'is_shopee': true,
                     'is_zalora': true
-                }
+                },
+                "3P": {
+                    'is_shopify': false,
+                    'is_lazada': true,
+                    'is_shopee': true,
+                    'is_zalora': true
+                },
             },
         }
     },
