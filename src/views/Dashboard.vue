@@ -87,8 +87,8 @@ export default {
             shopifyReadyToDL: false,
             generatedGID: null,
             processText: "",
-            //apiURL: 'http://localhost:3000',
-            apiURL: 'https://inventory-validator.onrender.com',
+            apiURL: 'http://localhost:3000',
+            //apiURL: 'https://inventory-validator.onrender.com',
             selectSite: '',
             sites: {
                 "AVON": {
@@ -166,8 +166,19 @@ export default {
                     'is_lazada': false,
                     'is_shopee': false,
                     'is_zalora': false
-                }
-                ,
+                },
+                "HERSCHEL": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                },
+                "QUIKSILVER": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                },
                 "ACTION_SPORTS_AND_OUTDOOR": {
                     'is_shopify': false,
                     'is_lazada': true,
