@@ -91,6 +91,18 @@ export default {
             apiURL: 'https://inventory-validator.onrender.com',
             selectSite: '',
             sites: {
+                "ALLBIRDS_PH": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                },
+                /*"ALLBIRDS_MY": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': true
+                },*/
                 "AVON": {
                     'is_shopify': true,
                     'is_lazada': false,
