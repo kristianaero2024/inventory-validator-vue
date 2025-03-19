@@ -1,27 +1,31 @@
 <template>
-    <div class="main-container">
-        <div class="process-text" v-html="processText"></div>
-        <div class="error-msg" v-html="errorMsg"></div>
-        <div class="export-btn-container">
-            <label>Choose Platform: </label><br />
-            <select v-model="choosedPlatform" class="select-field">
-                <option value="">-- select --</option>
-                <option
-                    v-if="selectSite != 'ACTION_SPORTS_AND_OUTDOOR' && selectSite != 'BAGS_AND_TRAVEL' && selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'"
-                    value="shopify">Shopify</option>
-                <option value="lazada">Lazada</option>
-                <option value="shopee">Shopee</option>
-                <option value="zalora">Zalora</option>
-            </select>
-            <br />
-            <label>Choose Site: </label><br />
-            <select v-model="selectSite" class="select-field select-site">
-                <option selected value="">-- select -- </option>
-                <option v-for="(details, siteName) in filteredSites" :key="siteName" :value="siteName">
-                    {{ siteName }}
-                </option>
-            </select>
-            <!--<button :class="choosedPlatform === 'shopify' ? 'choosed' : ''" color="primary"
+    <div>
+        <img src="/aw-logo.png" class='logo' alt="Logo" />
+
+        <div class="main-container">
+
+            <div class="process-text" v-html="processText"></div>
+            <div class="error-msg" v-html="errorMsg"></div>
+            <div class="export-btn-container">
+                <label>Choose Platform: </label><br />
+                <select v-model="choosedPlatform" class="select-field">
+                    <option value="">-- select --</option>
+                    <option
+                        v-if="selectSite != 'ACTION_SPORTS_AND_OUTDOOR' && selectSite != 'BAGS_AND_TRAVEL' && selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'"
+                        value="shopify">Shopify</option>
+                    <option value="lazada">Lazada</option>
+                    <option value="shopee">Shopee</option>
+                    <option value="zalora">Zalora</option>
+                </select>
+                <br />
+                <label>Choose Site: </label><br />
+                <select v-model="selectSite" class="select-field select-site">
+                    <option selected value="">-- select -- </option>
+                    <option v-for="(details, siteName) in filteredSites" :key="siteName" :value="siteName">
+                        {{ siteName }}
+                    </option>
+                </select>
+                <!--<button :class="choosedPlatform === 'shopify' ? 'choosed' : ''" color="primary"
                 class="export-btn export-shopify" @click="exportShopify"> SHOPIFY</button>
             <button :class="choosedPlatform === 'shopee' ? 'choosed' : ''" color="primary"
                 class="export-btn export-shopee" @click="exportShopee"> SHOPEE</button>
@@ -30,24 +34,24 @@
             <button :class="choosedPlatform === 'zalora' ? 'choosed' : ''" color="primary"
                 class="export-btn export zalora" @click="exportZalora"> ZALORA</button>
             -->
-        </div>
-        <div class="upload">
-            <label>Omisell Inventory: </label><br />
-            <input type="file" class="upload-omisell" @change="handleOmisellUpload" />
-            <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
-        </div>
-        <br />
-        <div class="upload-platform"
-            v-show="choosedPlatform == 'lazada' || choosedPlatform == 'shopee' || choosedPlatform == 'zalora'">
-            <label>Marketplace Inventory: </label><br />
-            <input type="file" class="upload-omisell" @change="handleMPUpload" />
-            <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
-        </div>
-        <br />
-        <br />
-        <button v-show="choosedPlatform != null" class="submit-generate-report" @click="generateReport">GENERATE
-            REPORT</button>
-        <!--  
+            </div>
+            <div class="upload">
+                <label>Omisell Inventory: </label><br />
+                <input type="file" class="upload-omisell" @change="handleOmisellUpload" />
+                <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
+            </div>
+            <br />
+            <div class="upload-platform"
+                v-show="choosedPlatform == 'lazada' || choosedPlatform == 'shopee' || choosedPlatform == 'zalora'">
+                <label>Marketplace Inventory: </label><br />
+                <input type="file" class="upload-omisell" @change="handleMPUpload" />
+                <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
+            </div>
+            <br />
+            <br />
+            <button v-show="choosedPlatform != null" class="submit-generate-report" @click="generateReport">GENERATE
+                REPORT</button>
+            <!--  
         <br />
         <div class="upload">
             <label>Shopee Inventory: </label>
@@ -64,11 +68,12 @@
             <input type="file" />
         </div>
         -->
-        <br />
+            <br />
 
 
-        <div class="loader" v-if="isLoading"></div>
+            <div class="loader" v-if="isLoading"></div>
 
+        </div>
     </div>
 </template>
 
@@ -240,28 +245,28 @@ export default {
     },
 
     computed: {
-        filteredSites(){
+        filteredSites() {
             return Object.keys(this.sites).reduce((filtered, siteName) => {
-                if(this.choosedPlatform == 'shopify'){
-                    if(this.sites[siteName].is_shopify){
+                if (this.choosedPlatform == 'shopify') {
+                    if (this.sites[siteName].is_shopify) {
                         filtered[siteName] = this.sites[siteName]
                     }
                 }
 
-                if(this.choosedPlatform == 'lazada'){
-                    if(this.sites[siteName].is_lazada){
+                if (this.choosedPlatform == 'lazada') {
+                    if (this.sites[siteName].is_lazada) {
                         filtered[siteName] = this.sites[siteName]
                     }
                 }
 
-                if(this.choosedPlatform == 'shopee'){
-                    if(this.sites[siteName].is_shopee){
+                if (this.choosedPlatform == 'shopee') {
+                    if (this.sites[siteName].is_shopee) {
                         filtered[siteName] = this.sites[siteName]
                     }
                 }
 
-                if(this.choosedPlatform == 'zalora'){
-                    if(this.sites[siteName].is_zalora){
+                if (this.choosedPlatform == 'zalora') {
+                    if (this.sites[siteName].is_zalora) {
                         filtered[siteName] = this.sites[siteName]
                     }
                 }
@@ -561,6 +566,15 @@ export default {
 body,
 body a {
     color: #000;
+}
+
+
+.logo {
+    width: 81px;
+    margin-bottom: 29px;
+    position: absolute;
+    top: 7px;
+    left: 10px;
 }
 
 /* HTML: <div class="loader"></div> */
