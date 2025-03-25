@@ -419,8 +419,8 @@ export default {
                                 this.errorMsg = response.error_msg
                             } else {
                                 this.processText = "Report Generated <br />"
-                                this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
-                                this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                                this.processText += `Per SKU : <a href='${response.data.comparisonFileUrl}'>Download here</a><br />`
+                                this.processText += `Per Brand : <a href='${response.data.groupedFileUrl}'>Download here</a>`
                             }
 
                             this.isLoading = false
@@ -532,8 +532,8 @@ export default {
                                                         this.processText = null
                                                     } else {
                                                         this.processText = "Report Generated <br />"
-                                                        this.processText += "Per SKU : <a href='" + this.apiURL + "/exports/comparisonResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a><br />"
-                                                        this.processText += "Per Brand : <a href='" + this.apiURL + "/exports/groupedResults-" + this.choosedPlatform + '-' + this.selectSite + ".csv'>Download here</a>"
+                                                        this.processText += `Per SKU : <a href='${response.data.comparisonFileUrl}'>Download here</a><br />`
+                                                        this.processText += `Per Brand : <a href='${response.data.groupedFileUrl}'>Download here</a>`
                                                     }
                                                     this.isLoading = false
                                                 })
