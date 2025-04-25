@@ -108,6 +108,12 @@ export default {
                     'is_shopee': false,
                     'is_zalora': true
                 },*/
+                "ATMOS": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': false
+                },
                 "AVON": {
                     'is_shopify': true,
                     'is_lazada': false,
