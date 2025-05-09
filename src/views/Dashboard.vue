@@ -139,8 +139,8 @@ export default {
       shopifyReadyToDL: false,
       generatedGID: null,
       processText: "",
-      //apiURL: "http://localhost:3005",
-      apiURL: "https://inventory-validator.onrender.com",
+      apiURL: "http://localhost:3005",
+      //apiURL: 'https://inventory-validator.onrender.com',
       selectSite: "",
       sites: {
         ALLBIRDS_PH: {
