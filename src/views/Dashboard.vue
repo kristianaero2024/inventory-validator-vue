@@ -251,6 +251,12 @@ export default {
           is_shopee: false,
           is_zalora: false,
         },
+        SLEDGERS: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
         WORLD_TRAVELLER: {
           is_shopify: true,
           is_lazada: false,
