@@ -281,6 +281,48 @@ export default {
           is_shopee: true,
           is_zalora: true,
         },
+        HYDROFLASK_SG: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        TIMBUK_2_SG: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        TOMS_SG: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        REEF_SG: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        BAGS_AND_TRAVEL: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        ALLBIRDS_SG: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        HERSCHEL_SG: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
       },
     };
   },
