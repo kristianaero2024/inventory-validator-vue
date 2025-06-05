@@ -140,7 +140,8 @@ export default {
       generatedGID: null,
       processText: "",
       //apiURL: "http://localhost:3005",
-      apiURL: "https://inventory-validator.onrender.com",
+      //apiURL: "https://inventory-validator.onrender.com",
+      apiURL: "https://pricing-validator-be.onrender.com",
       selectSite: "",
       sites: {
         ALLBIRDS_PH: {
@@ -156,6 +157,12 @@ export default {
                     'is_zalora': true
                 },*/
         AVON: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        ATMOS: {
           is_shopify: true,
           is_lazada: false,
           is_shopee: false,
