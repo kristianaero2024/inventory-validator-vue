@@ -143,18 +143,12 @@ export default {
       //apiURL: 'https://inventory-validator.onrender.com',
       selectSite: "",
       sites: {
-        ALLBIRDS_PH: {
+        /*ALLBIRDS_PH: {
           is_shopify: true,
           is_lazada: false,
           is_shopee: false,
           is_zalora: false,
         },
-        /*"ALLBIRDS_MY": {
-                    'is_shopify': true,
-                    'is_lazada': false,
-                    'is_shopee': false,
-                    'is_zalora': true
-                },*/
         AVON: {
           is_shopify: true,
           is_lazada: false,
@@ -280,6 +274,198 @@ export default {
           is_lazada: true,
           is_shopee: true,
           is_zalora: true,
+        },*/
+        ALLBIRDS_PH: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        /*"ALLBIRDS_MY": {
+                    'is_shopify': true,
+                    'is_lazada': false,
+                    'is_shopee': false,
+                    'is_zalora': true
+                },*/
+        AVON: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        ATMOS: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        ATMOS: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        RESTOERUN: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        TTC: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        GRIND: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        ROX: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        BRATPACK: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        JANSPORT: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        HYDROFLASK: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        EYS: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        AETREX: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        DC: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        HERSCHEL: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        QUIKSILVER: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        COLUMBIA: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        HEDGREN: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        SLEDGERS: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        WORLD_TRAVELLER: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        ACTION_SPORTS_AND_OUTDOOR: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        BAGS_AND_TRAVEL: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        FOOTWEAR_WELLNESS_AND_ACCESSORIES: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        "3P": {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
+        HYDROFLASK_SG: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        TIMBUK_2_SG: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        TOMS_SG: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        REEF_SG: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        BAGS_AND_TRAVEL: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        ALLBIRDS_SG: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        HERSCHEL_SG: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
         },
       },
     };
