@@ -120,8 +120,8 @@ export default {
       shopifyReadyToDL: false,
       generatedGID: null,
       processText: "",
-      apiURL: "http://localhost:3005",
-      //  apiURL: "https://pricing-validator-be.onrender.com",
+      // apiURL: "http://localhost:3005",
+       apiURL: "https://pricing-validator-be.onrender.com",
       selectSite: "",
       sites: {
         ALLBIRDS_PH: {
