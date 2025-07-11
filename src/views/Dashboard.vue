@@ -67,8 +67,9 @@
       </div>
       <br />
       <br />
-      <button v-if="!isCheckPrice" v-show="choosedPlatform != null" class="submit-generate-report" @click="generateReport">
-        
+      <button v-if="!isCheckPrice" v-show="choosedPlatform != null" class="submit-generate-report"
+        @click="generateReport">
+
         GENERATE REPORT
       </button>
 
@@ -94,7 +95,9 @@
         </div>
         -->
       <br />
-      <div class="loader" v-if="isLoading"></div>
+      <div v-if="isLoading" class="loader-overlay">
+        <div class="loader"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -117,8 +120,8 @@ export default {
       shopifyReadyToDL: false,
       generatedGID: null,
       processText: "",
-      // apiURL: "http://localhost:3005",
-       apiURL: "https://pricing-validator-be.onrender.com",
+      apiURL: "http://localhost:3005",
+      //  apiURL: "https://pricing-validator-be.onrender.com",
       selectSite: "",
       sites: {
         ALLBIRDS_PH: {
@@ -933,6 +936,7 @@ body a {
   right: 0;
   top: 30%;
   margin: 0 auto;
+  z-index: 9999; 
 }
 
 .loader::before {
@@ -940,6 +944,19 @@ body a {
   transform-origin: bottom;
   animation: l4-1 0.5s infinite linear alternate,
     l4-2 0.5s infinite steps(1) alternate;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998; 
 }
 
 @keyframes l4-0 {
