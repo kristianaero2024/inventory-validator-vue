@@ -1,7 +1,6 @@
 <template>
   <div>
     <img src="/aw-logo.png" class="logo" alt="Logo" />
-
     <div class="main-container">
       <div class="process-text" v-html="processText"></div>
       <div class="error-msg" v-html="errorMsg"></div>
@@ -68,8 +67,8 @@
       </div>
       <br />
       <br />
-      <button v-if="!isCheckPrice" v-show="choosedPlatform != null" class="submit-generate-report"
-        @click="generateReport">
+      <button v-if="!isCheckPrice" v-show="choosedPlatform != null" class="submit-generate-report" @click="generateReport">
+        
         GENERATE REPORT
       </button>
 
@@ -118,8 +117,8 @@ export default {
       shopifyReadyToDL: false,
       generatedGID: null,
       processText: "",
-      //apiURL: "http://localhost:3005",
-       apiURL: "https://inventory-validator.onrender.com",
+      // apiURL: "http://localhost:3005",
+       apiURL: "https://pricing-validator-be.onrender.com",
       selectSite: "",
       sites: {
         ALLBIRDS_PH: {
