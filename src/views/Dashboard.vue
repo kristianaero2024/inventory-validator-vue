@@ -30,6 +30,7 @@
           <option v-if="!isCheckPrice" value="zalora">Zalora</option>
         </select>
         <br />
+        {{ filteredSites }}
         <label>Choose Site: </label><br />
         <select v-model="selectSite" class="select-field select-site">
           <option selected value="">-- select --</option>
@@ -312,12 +313,6 @@ export default {
           is_zalora: false,
         },
         REEF_SG: {
-          is_shopify: true,
-          is_lazada: false,
-          is_shopee: false,
-          is_zalora: false,
-        },
-        BAGS_AND_TRAVEL: {
           is_shopify: true,
           is_lazada: false,
           is_shopee: false,
