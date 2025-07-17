@@ -30,7 +30,6 @@
           <option v-if="!isCheckPrice" value="zalora">Zalora</option>
         </select>
         <br />
-        {{ filteredSites }}
         <label>Choose Site: </label><br />
         <select v-model="selectSite" class="select-field select-site">
           <option selected value="">-- select --</option>
