@@ -152,8 +152,8 @@ export default {
       shopifyReadyToDL: false,
       generatedGID: null,
       processText: "",
-      // apiURL: "http://localhost:3005",
-       apiURL: "https://pricing-validator-be.onrender.com",
+      apiURL: "http://localhost:3005",
+      //  apiURL: "https://pricing-validator-be.onrender.com",
       selectSite: "",
       sites: {
         ALLBIRDS_PH: {
@@ -706,13 +706,15 @@ export default {
           console.log(rsExportShopee.data);
 
           if (rsExportShopee) {
-            if (rsExportShopee.data.error_msg) {
-              this.errorMsg = rsExportShopee.data.error_msg;
-              this.processText = null;
-            } else {
-              this.processText = "Report Generated <br />";
-              this.processText += `Price comparison : <a href='${rsExportShopee.data.data.fileUrl}'>Download here</a><br />`;
-            }
+            if (rsExportShopee.data.details) {
+              this.errorMsg = rsExportShopee.data.details.message;
+              this.processText = "Oops!";
+              this.isLoading = false;
+              return;
+            } 
+
+            this.processText = "Report Generated <br />";
+            this.processText += `Price comparison : <a href='${rsExportShopee.data.data.fileUrl}'>Download here</a><br />`;
             this.isLoading = false;
           }
 
@@ -1082,7 +1084,7 @@ label {
   border: 3px solid #000;
 }
 
-.upload label {
+.upload label { 
   font-weight: bold;
 }
 
