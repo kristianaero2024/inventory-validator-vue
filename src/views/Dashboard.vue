@@ -5,35 +5,27 @@
       <div class="process-text" v-html="processText"></div>
       <div class="error-msg" v-html="errorMsg"></div>
       <div class="export-btn-container">
-        <label>Check Price: </label>
-        &nbsp;<input
-          type="checkbox"
-          @change="checkPrice()"
-          v-model="isCheckPrice"
-        /><br /><br />
+        <div class="checkPrice_container">
+          <label>Check Price: </label>
+          &nbsp;<input type="checkbox" @change="checkPrice()" v-model="isCheckPrice" />
+        </div>
         <label>Choose Platform: </label><br />
         <select v-model="choosedPlatform" class="select-field">
           <option value="">-- select --</option>
-          <option
-            v-if="
-              selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
-              selectSite != 'BAGS_AND_TRAVEL' &&
-              selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
-            "
-            value="shopify"
-          >
+          <option v-if="
+            selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
+            selectSite != 'BAGS_AND_TRAVEL' &&
+            selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
+          " value="shopify">
             Shopify
           </option>
           <option v-if="!isCheckPrice" value="lazada">Lazada</option>
           <!-- <option v-if="!isCheckPrice" value="shopee">Shopee</option> -->
-          <option
-            v-if="
-              selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
-              selectSite != 'BAGS_AND_TRAVEL' &&
-              selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
-            "
-            value="shopee"
-          >
+          <option v-if="
+            selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
+            selectSite != 'BAGS_AND_TRAVEL' &&
+            selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
+          " value="shopee">
             Shopee
           </option>
           <option v-if="!isCheckPrice" value="zalora">Zalora</option>
@@ -42,11 +34,7 @@
         <label>Choose Site: </label><br />
         <select v-model="selectSite" class="select-field select-site">
           <option selected value="">-- select --</option>
-          <option
-            v-for="(details, siteName) in filteredSites"
-            :key="siteName"
-            :value="siteName"
-          >
+          <option v-for="(details, siteName) in filteredSites" :key="siteName" :value="siteName">
             {{ siteName }}
           </option>
         </select>
@@ -69,45 +57,28 @@
 
       <div class="upload" v-if="!isCheckPrice">
         <label>Omisell Inventory: </label><br />
-        <input
-          type="file"
-          class="upload-omisell"
-          @change="handleOmisellUpload"
-        />
+        <input type="file" class="upload-omisell" @change="handleOmisellUpload" />
         <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
       </div>
       <br />
-      <div
-        v-if="!isCheckPrice"
-        class="upload-platform"
-        v-show="
-          choosedPlatform == 'lazada' ||
-          choosedPlatform == 'shopee' ||
-          choosedPlatform == 'zalora'
-        "
-      >
+      <div v-if="!isCheckPrice" class="upload-platform" v-show="choosedPlatform == 'lazada' ||
+        choosedPlatform == 'shopee' ||
+        choosedPlatform == 'zalora'
+        ">
         <label>Marketplace Inventory: </label><br />
         <input type="file" class="upload-omisell" @change="handleMPUpload" />
         <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
       </div>
       <br />
       <br />
-      <button
-        v-if="!isCheckPrice"
-        v-show="choosedPlatform != null"
-        class="submit-generate-report"
-        @click="generateReport"
-      >
+      <button v-if="!isCheckPrice" v-show="choosedPlatform != null" class="submit-generate-report"
+        @click="generateReport">
         GENERATE REPORT
       </button>
 
-      <button
-        v-if="isCheckPrice"
-        v-show="choosedPlatform != null"
-        class="submit-generate-report"
-        @click="generateReportPrice"
-      >
-        GENERATE REPORT.
+      <button v-if="isCheckPrice" ref="shopee_generate_button" v-show="choosedPlatform != null"
+        class="submit-generate-report" @click="generateReportPrice">
+        GENERATE REPORT
       </button>
       <!--  .
         <br />
@@ -171,7 +142,7 @@ export default {
         AVON: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         ATMOS: {
@@ -225,7 +196,7 @@ export default {
         HYDROFLASK: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         EYS: {
@@ -237,13 +208,13 @@ export default {
         AETREX: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         DC: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         HERSCHEL: {
@@ -255,19 +226,19 @@ export default {
         QUIKSILVER: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         COLUMBIA: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         HEDGREN: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         SLEDGERS: {
@@ -279,7 +250,7 @@ export default {
         WORLD_TRAVELLER: {
           is_shopify: true,
           is_lazada: false,
-          is_shopee: false,
+          is_shopee: true,
           is_zalora: false,
         },
         ACTION_SPORTS_AND_OUTDOOR: {
@@ -363,6 +334,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.isCheckPrice = true;
+  },
 
   computed: {
     filteredSites() {
@@ -416,10 +390,10 @@ export default {
         const response = await axios
           .post(
             this.apiURL +
-              "/upload-csv?type=omisell&platform=" +
-              this.choosedPlatform +
-              "&site=" +
-              this.selectSite,
+            "/upload-csv?type=omisell&platform=" +
+            this.choosedPlatform +
+            "&site=" +
+            this.selectSite,
             formData,
             {
               headers: {
@@ -451,10 +425,10 @@ export default {
         const response = await axios
           .post(
             this.apiURL +
-              "/upload-csv?type=dt&platform=" +
-              this.choosedPlatform +
-              "&site=" +
-              this.selectSite,
+            "/upload-csv?type=dt&platform=" +
+            this.choosedPlatform +
+            "&site=" +
+            this.selectSite,
             formData,
             {
               headers: {
@@ -485,10 +459,10 @@ export default {
         const response = await axios
           .post(
             this.apiURL +
-              "/upload-csv?type=mp&platform=" +
-              this.choosedPlatform +
-              "&site=" +
-              this.selectSite,
+            "/upload-csv?type=mp&platform=" +
+            this.choosedPlatform +
+            "&site=" +
+            this.selectSite,
             formData,
             {
               headers: {
@@ -707,11 +681,22 @@ export default {
 
           if (rsExportShopee) {
             if (rsExportShopee.data.details) {
+              if (rsExportShopee.data.details.error === "error_sign") {
+                this.errorMsg = "";
+                this.processText = "";
+                this.isLoading = true;
+                this.$refs.shopee_generate_button.click();
+
+                return
+              }
+
               this.errorMsg = rsExportShopee.data.details.message;
               this.processText = "Oops!";
               this.isLoading = false;
+
+
               return;
-            } 
+            }
 
             this.processText = "Report Generated <br />";
             this.processText += `Price comparison : <a href='${rsExportShopee.data.data.fileUrl}'>Download here</a><br />`;
@@ -1084,7 +1069,7 @@ label {
   border: 3px solid #000;
 }
 
-.upload label { 
+.upload label {
   font-weight: bold;
 }
 
@@ -1104,8 +1089,7 @@ label {
   margin-bottom: 21px;
 }
 
-.select-site {
-}
+.select-site {}
 
 button.export-btn.export-shopify {
   background-color: green;
@@ -1158,5 +1142,9 @@ button.export-btn.export.zalora {
   color: dodgerblue;
   font-weight: 600;
   text-decoration: underline;
+}
+
+.checkPrice_container {
+  display: none;
 }
 </style>
