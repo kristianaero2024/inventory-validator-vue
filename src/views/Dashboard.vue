@@ -139,7 +139,7 @@ export default {
       shopifyReadyToDL: false,
       generatedGID: null,
       processText: "",
-      //apiURL: "http://localhost:3005",
+      //apiURL: "http://localhost:3008",
       apiURL: "https://inventory-validator.onrender.com",
       selectSite: "",
       sites: {
@@ -306,6 +306,12 @@ export default {
           is_zalora: false,
         },
         TOMS_SG: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        TUMI_OUTLET: {
           is_shopify: true,
           is_lazada: false,
           is_shopee: false,
