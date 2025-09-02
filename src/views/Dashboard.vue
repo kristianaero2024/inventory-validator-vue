@@ -269,6 +269,12 @@ export default {
           is_shopee: true,
           is_zalora: true,
         },
+        NATIVE: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
         WORLD_TRAVELLER: {
           is_shopify: true,
           is_lazada: false,
