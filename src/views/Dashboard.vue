@@ -263,6 +263,12 @@ export default {
           is_shopee: false,
           is_zalora: false,
         },
+        KEEN: {
+          is_shopify: false,
+          is_lazada: true,
+          is_shopee: true,
+          is_zalora: true,
+        },
         WORLD_TRAVELLER: {
           is_shopify: true,
           is_lazada: false,
