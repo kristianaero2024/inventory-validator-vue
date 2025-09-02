@@ -7,25 +7,35 @@
       <div class="export-btn-container">
         <div class="checkPrice_container">
           <label>Check Price: </label>
-          &nbsp;<input type="checkbox" @change="checkPrice()" v-model="isCheckPrice" />
+          &nbsp;<input
+            type="checkbox"
+            @change="checkPrice()"
+            v-model="isCheckPrice"
+          />
         </div>
         <label>Choose Platform: </label><br />
         <select v-model="choosedPlatform" class="select-field">
           <option value="">-- select --</option>
-          <option v-if="
-            selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
-            selectSite != 'BAGS_AND_TRAVEL' &&
-            selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
-          " value="shopify">
+          <option
+            v-if="
+              selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
+              selectSite != 'BAGS_AND_TRAVEL' &&
+              selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
+            "
+            value="shopify"
+          >
             Shopify
           </option>
           <option v-if="!isCheckPrice" value="lazada">Lazada</option>
           <!-- <option v-if="!isCheckPrice" value="shopee">Shopee</option> -->
-          <option v-if="
-            selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
-            selectSite != 'BAGS_AND_TRAVEL' &&
-            selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
-          " value="shopee">
+          <option
+            v-if="
+              selectSite != 'ACTION_SPORTS_AND_OUTDOOR' &&
+              selectSite != 'BAGS_AND_TRAVEL' &&
+              selectSite != 'FOOTWEAR_WELLNESS_AND_ACCESSORIES'
+            "
+            value="shopee"
+          >
             Shopee
           </option>
           <option v-if="!isCheckPrice" value="zalora">Zalora</option>
@@ -34,7 +44,11 @@
         <label>Choose Site: </label><br />
         <select v-model="selectSite" class="select-field select-site">
           <option selected value="">-- select --</option>
-          <option v-for="(details, siteName) in filteredSites" :key="siteName" :value="siteName">
+          <option
+            v-for="(details, siteName) in filteredSites"
+            :key="siteName"
+            :value="siteName"
+          >
             {{ siteName }}
           </option>
         </select>
@@ -57,27 +71,45 @@
 
       <div class="upload" v-if="!isCheckPrice">
         <label>Omisell Inventory: </label><br />
-        <input type="file" class="upload-omisell" @change="handleOmisellUpload" />
+        <input
+          type="file"
+          class="upload-omisell"
+          @change="handleOmisellUpload"
+        />
         <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
       </div>
       <br />
-      <div v-if="!isCheckPrice" class="upload-platform" v-show="choosedPlatform == 'lazada' ||
-        choosedPlatform == 'shopee' ||
-        choosedPlatform == 'zalora'
-        ">
+      <div
+        v-if="!isCheckPrice"
+        class="upload-platform"
+        v-show="
+          choosedPlatform == 'lazada' ||
+          choosedPlatform == 'shopee' ||
+          choosedPlatform == 'zalora'
+        "
+      >
         <label>Marketplace Inventory: </label><br />
         <input type="file" class="upload-omisell" @change="handleMPUpload" />
         <!--<button @click="uploadOmisellCSV">Upload Omisell CSV</button>-->
       </div>
       <br />
       <br />
-      <button v-if="!isCheckPrice" v-show="choosedPlatform != null" class="submit-generate-report"
-        @click="generateReport">
+      <button
+        v-if="!isCheckPrice"
+        v-show="choosedPlatform != null"
+        class="submit-generate-report"
+        @click="generateReport"
+      >
         GENERATE REPORT
       </button>
 
-      <button v-if="isCheckPrice" ref="shopee_generate_button" v-show="choosedPlatform != null"
-        class="submit-generate-report" @click="generateReportPrice">
+      <button
+        v-if="isCheckPrice"
+        ref="shopee_generate_button"
+        v-show="choosedPlatform != null"
+        class="submit-generate-report"
+        @click="generateReportPrice"
+      >
         GENERATE REPORT
       </button>
       <!--  .
@@ -123,8 +155,8 @@ export default {
       shopifyReadyToDL: false,
       generatedGID: null,
       processText: "",
-      // apiURL: "http://localhost:3005",
-       apiURL: "https://pricing-validator-be.onrender.com",
+      apiURL: "http://localhost:3005",
+      //apiURL: "https://pricing-validator-be.onrender.com",
       selectSite: "",
       sites: {
         ALLBIRDS_PH: {
@@ -242,6 +274,12 @@ export default {
           is_zalora: false,
         },
         SLEDGERS: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        MIZUNO: {
           is_shopify: true,
           is_lazada: false,
           is_shopee: false,
@@ -390,10 +428,10 @@ export default {
         const response = await axios
           .post(
             this.apiURL +
-            "/upload-csv?type=omisell&platform=" +
-            this.choosedPlatform +
-            "&site=" +
-            this.selectSite,
+              "/upload-csv?type=omisell&platform=" +
+              this.choosedPlatform +
+              "&site=" +
+              this.selectSite,
             formData,
             {
               headers: {
@@ -425,10 +463,10 @@ export default {
         const response = await axios
           .post(
             this.apiURL +
-            "/upload-csv?type=dt&platform=" +
-            this.choosedPlatform +
-            "&site=" +
-            this.selectSite,
+              "/upload-csv?type=dt&platform=" +
+              this.choosedPlatform +
+              "&site=" +
+              this.selectSite,
             formData,
             {
               headers: {
@@ -459,10 +497,10 @@ export default {
         const response = await axios
           .post(
             this.apiURL +
-            "/upload-csv?type=mp&platform=" +
-            this.choosedPlatform +
-            "&site=" +
-            this.selectSite,
+              "/upload-csv?type=mp&platform=" +
+              this.choosedPlatform +
+              "&site=" +
+              this.selectSite,
             formData,
             {
               headers: {
@@ -667,15 +705,12 @@ export default {
             site: this.selectSite,
           };
 
-          const rsExportShopee = await axios.get(
-            apiURL + "/compare/shopee",
-            {
-              params: params,
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          const rsExportShopee = await axios.get(apiURL + "/compare/shopee", {
+            params: params,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
 
           console.log(rsExportShopee.data);
 
@@ -687,13 +722,12 @@ export default {
                 this.isLoading = true;
                 this.$refs.shopee_generate_button.click();
 
-                return
+                return;
               }
 
               this.errorMsg = rsExportShopee.data.details.message;
               this.processText = "Oops!";
               this.isLoading = false;
-
 
               return;
             }
@@ -1089,7 +1123,8 @@ label {
   margin-bottom: 21px;
 }
 
-.select-site {}
+.select-site {
+}
 
 button.export-btn.export-shopify {
   background-color: green;
