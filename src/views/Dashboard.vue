@@ -281,6 +281,18 @@ export default {
           is_shopee: false,
           is_zalora: false,
         },
+        PNVF: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
+        MIZUNO: {
+          is_shopify: true,
+          is_lazada: false,
+          is_shopee: false,
+          is_zalora: false,
+        },
         ACTION_SPORTS_AND_OUTDOOR: {
           is_shopify: false,
           is_lazada: true,
