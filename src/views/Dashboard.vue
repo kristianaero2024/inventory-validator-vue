@@ -6,12 +6,12 @@
       <div class="process-text" v-html="processText"></div>
       <div class="error-msg" v-html="errorMsg"></div>
       <div class="export-btn-container">
-        <label>Check Price: </label>
+        <!--<label>Check Price: </label>
         &nbsp;<input
           type="checkbox"
           @change="checkPrice()"
           v-model="isCheckPrice"
-        /><br /><br />
+        /><br /><br />-->
         <label>Choose Platform: </label><br />
         <select v-model="choosedPlatform" class="select-field">
           <option value="">-- select --</option>
